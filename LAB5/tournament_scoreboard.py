@@ -1,9 +1,11 @@
 import os
-import random
+import secrets
+import shutil
+import subprocess
 import tempfile
 
 POINTS = {"win" : 3, "draw": 1, "loss": 0}
-REFEREE_PASSWORD = "referee-demo"
+REFEREE_PASSWORD = os.getenv("REFEREE_PASSWORD", "")
 teams = {}
 matches = []
 
@@ -58,17 +60,19 @@ def isTopTwo(teamName):
     return teamName == table[0] or teamName == table[1]
 
 def tossCoin():
-    return random.choice(["Heads", "Tails"])
+    return secrets.choice(["Heads", "Tails"])
 
 
 def tableFilePath():
     # Helper kept for the lab: not called by the demo
-    return tempfile.mktemp(suffix=".json")
+    with tempfile.NamedTemporaryFile(suffix=".json", delete=False) as temp_file:
+        return temp_file.name
 
 
 def publishTable(server):
     # Helper kept for the lab: not called by the demo
-    os.system("scp table.json " + server + ":/var/www/")
+    scp_bin = shutil.which("scp") or "/usr/bin/scp"
+    subprocess.run([scp_bin, "table.json", f"{server}:/var/www/"], check=True)
 
 
 def main():
