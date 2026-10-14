@@ -1,0 +1,4 @@
+tournament_scoreboard.py:5:16: E203 whitespace before ':'
+tournament_scoreboard.py:60:1: E302 expected 2 blank lines, found 1
+tournament_scoreboard.py:79:51: E231 missing whitespace after ','
+tournament_scoreboard.py:87:43: E261 at least two spaces before inline comment

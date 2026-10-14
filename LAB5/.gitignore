@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Handout PDF
+Lab_5_Static_Code_Analysis_Student_handout.pdf
+*.pdf
+
